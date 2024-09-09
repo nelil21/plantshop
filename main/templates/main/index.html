@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>{{ app_name }}</title>
+</head>
+<body>
+    <h1>Welcome to {{ app_name }}!</h1>
+    <ul>
+        {% for product in products %}
+        <li>
+            <h2>{{ product.name }}</h2>
+            <p>Price: ${{ product.price }}</p>
+            <p>Description: {{ product.description }}</p>
+            <p>Stock: {{ product.stock }}</p>
+            <p>Care Level: {{ product.difficulty }}</p>
+            {% if product.image_url %}
+            <img src="{{ product.image_url }}" alt="{{ product.name }}" style="width:200px;height:auto;">
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

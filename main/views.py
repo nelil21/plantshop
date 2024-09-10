@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from .models import Product
 
-def index(request):
-    products = Product.objects.all()
+def show_main(request):
     context = {
-        'products': products,
         'app_name': 'PlantShop',
+        'npm' : '2306123456',
+        'name': 'Nelil Amaani',
+        'class': 'PBP E',
     }
-    return render(request, 'main/index.html', context)
+    return render(request, 'main/main.html', context)

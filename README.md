@@ -68,6 +68,7 @@ Jawaban atas beberapa pertanyaan terkait
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 client melakukan request ->  urls.py (mencocokan URL) -> views.py (menjalankan logika aplikasi) -> models.py (mengambil data dari database) -> views.py (memproses data) -> Template (main.html) -> Respons kembali ke client
+![Flowchart](assets/bagan.png)
 
 3. Jelaskan fungsi git dalam pengembangan perangkat lunak!
 1.) Git memfasilitasi berkolaborasi dengan banyak pengembang yang bekerja dalam proyek yang sama tanpa saling menggangu.

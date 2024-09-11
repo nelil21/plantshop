@@ -1,6 +1,7 @@
 Nama : Nelil Amaani
 NPM : 2306227835
 Kelas : PBP B
+web: http://nelil-amaani-plantshop.pbp.cs.ui.ac.id/
 
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
 1.) Membuat sebuah proyek Django baru

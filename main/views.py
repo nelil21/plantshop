@@ -4,6 +4,7 @@ from main.models import ProductEntry
 from django.http import HttpResponse
 from django.core import serializers
 
+#fungsi untuk show main
 def show_main(request):
     product_entries = ProductEntry.objects.all()
 

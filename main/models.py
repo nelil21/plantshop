@@ -1,14 +1,16 @@
+import uuid
 from django.db import models
 
-class Product(models.Model):
-    name = models.CharField(max_length=100)  # Nama tanaman
+class ProductEntry(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # tambahkan baris ini
+    name = models.CharField(max_length=255)  # Nama tanaman
     price = models.IntegerField()  # Harga tanaman
     description = models.TextField()  # Deskripsi tanaman
-    stock = models.IntegerField(default=0)  # Stok tanaman
-    difficulty = models.CharField(
-        max_length=20, choices=[('Easy', 'Easy'), ('Medium', 'Medium'), ('Hard', 'Hard')], default='Medium'
-    )  # Tingkat perawatan
-    image_url = models.URLField(null=True, blank=True)  # URL gambar tanaman
-
-    def __str__(self):
-        return self.name
+    stock = models.IntegerField()  # Stok tanaman
+    DIFFICULTY_CHOICES = [
+        ('Easy', 'Easy'),
+        ('Medium', 'Medium'),
+        ('Difficult', 'Difficult'),
+    ]
+    
+    difficulty = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES, default='Easy')

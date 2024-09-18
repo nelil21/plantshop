@@ -86,3 +86,68 @@ client melakukan request ->  urls.py (mencocokan URL) -> views.py (menjalankan l
 
 5. Mengapa model pada Django disebut sebagai ORM?
 model pada Django disebut sebagai ORM (Object-Relational Mapping) karena model tersebut menggunakan pendekatan pemetaan object python ke dalam struktur basis data relasional, sehingga memungkinkan developer untuk berinteraksi dengan basis data dengan menggunakan object python tanpa perlu membuka SQL secara langsung.
+______________________________________________________________________________________________________
+1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+data delivery diperlukan dalam implementasi sebuah platform karena untuk mengahsilkan dan mendapatkan data yang dapat diakses, dikirim, dan diterima oleh pengguna dan komponen dengan cara yang aman dan efisien. Ada beberapa alasan mengapa data delivery itu penting:
+1.) Koneksi antar komponen
+Data delivery memungkinkan komponen-komponen saling bertukar informasi secara real-time sehingga platform dapat berfungsi dengan baik.
+2.) Pengambilan keputusan yang tepat waktu
+pengiriman data secara real-time memungkinkan perusahaan untuk mengakses dan menganalisi data saat data tersebut dihasilkan, sehingga perusahaan dapat membuat keputusan yang cepat dan tepat.
+3.) Pengalaman pelanggan yang lebih baik
+Sistem data delivery memastikan pengambilan dan pengiriman data dapat berjalan dengan lancar, sehingga memungkinkan pengguna mendapatkan data yang relevan dan tepat waktu.
+4.) Keamanan data
+Data delivery berguna untuk memastikan data dapat terkirim dengan aman melalui enkripsi dan juga autetifikasi, sehingga dapat memastikan keamanan pengguna.
+
+2. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Dalam berbagai kasus, JSON dianggap lebih baik daripada XML. Berikut alasannya:
+1.) JSON memiliki struktur yang ringkas, sehingga JSON menghasilkan file yng lebih kecil daripada XML yang memiliki tag pembuka dan penutup, sehingga memiliki struktur yang lebih verbose(panjang).
+2.) JSON mudah diparsing oleh berbagai bahasa pemograman, khususnya JavaSCript. Sedangkan XML membutuhkan parser yang lebih komplex dengan SAX parsers atau DOM parsers, yang membutuhkan banyak sumberdaya dan memori.
+3.) JSON cocok dengan JavaScript yang merupakan bahasa utama untuk pengembangan web. sedangkan XML bisa menggunakan JavaScript tetapi perlu informasi tambahan untu menjadi object JavaScript.
+4..) JSON memiliki struktur yang sederhana dengan objek, array, dan nilai dasar yang dapat dipahami pengguna. sedangkan, XML memiliki atribut, nameespace, dan skema yang lebih kompleks yang dapat membingungkan pengguna.
+
+JSON lebih populer dibanding XML karena memiliki struktur yang lebih ringkas sehingga lebih cepat untuk diproses, JSON juga lebih kompatibel dengan teknologi web modern, terutama dalam koneksi antara server dan aplikasi web. Namun, di satu sisi XML masih memiliki keunggulan seperti dokumen dengan struktur yang lebih kompleks, sehingga validasi data lebih ketat.
+
+3. Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+is_valid merupakan sebuah method yang bekerja dengan form. Method ii berguna untuk melakukan validasi data yang dikirim pengguna melalui form. Method is_valid() pada django memiliki beberapa fungsi penting dalam pengelolaan form: 
+1.) melakuakan validasi data yang dikirim pengguna.
+2.) is_valid() dapat memicu proses pembersihan data melalui method clean() yang terdapat pada form tertentu atau yield tertentu. Method ini membersikan data agar aman dan sesuai untuk pemrosesan lanjut atuu penyimpanan dalam database.
+3.) Jika  ketemukan data yang tidak valid atau kesalahan, method ini akan mengumpulkan pesan eror dan menampilkan kepada pengguna agar pengguna dapat memperbaiki input yang salah.
+
+kita membutuhkan method is_valid() karena beberapa alasan
+1.)keamanan
+validasi melalui is_valid() dapat membantu serangan yang berbahaya seperti cross-site scripting atau SQL injection dengan memastikan data yang diinput pengguna sudah divalidasi dengan benar, sehingga data yang masuk bersih dari kode berbahaya.
+2.) Integritas data
+validasi melalui is_valid() memastikan bahwa data yang masuk ke dalam sistem merupakan data yang sesuai dengan aturan bisnis yang telah disepakati dan ditentukan.
+3.) Pengalaman pengguna lebih baik
+validasi melalui is_valid() dapat memberikan feedback jika terjadi kesalahan input dan akan menampilkannya pada pengguna, sehingga pengguna dapat mengetahui kesalahan apa yang perlu diperbaiki.
+
+
+4. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+
+Mengapa kita membutuhkan csrf_token saat membuat form di Django? 
+csrf_token merupakan token yang unik yang dihasilkan server dan disisipkan ke setap form HTML. Token ini dikirim bersama form untuk memastikan bahwa permintaan dikirim dari penguna yang sah bukan dari pihak eksternal yang mencoba untuk masuk. Django hanya memproses token yang valid dan terikat dengan sesi pengguna yang aktif.
+csrf_token dapat mencegah serangan berbahaya, memverivikasi asal permintaan, dan meningkatkan keamamana aplikasi.
+
+Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django?
+tanpa csrf_token, aplikasi menjadi lebih rentan terhadap serangan Site Request Forgery (CSRF), penyerang dapat mengirimkan permintaan atas nama pengguna sah tanpa sepengetahuanya. Hal tersebut dapat menyebabkan perubahan data, seperti perubahan pengaturan akun dan transaksi yang berbahaya.
+
+Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+Penyerang dapat membuat halaman web atau scrip dengan memanfaatkan sesi pengguna sah untuk mengirim permintaan berbahaya ke server. Dengan tidak adanya  csrf_token, aplikasi tidak bisa membedakan permintaan yang berasal dari pengguna sah atau dari penyerang. Sehingga permintaan berbahaya tersebut dapat terproses dengan mudah.
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+membuat sebuah file base.html di dalam direktori templates yang akan berfungsi sebagai kerangka umum untuk tempalte dasar. lalu daftakan kerangka tersebut di TEMPLATES pada setting.py. Lalu kita tambahkan UUID setiap object di model.py . kemudian, lakukan migrasi model dengan menjalankan
+python manage.py makemigrations
+python manage.py migrate
+Langkah selanjutnya kita membuat form input yang ditampilkan pada html. pertama, kita membuat forms.py untuk membuat fields di modelnya. kemudian pada views.py ditambahkan fungsi untuk memvalidasi data input dan mengirimkannya dari forms.py ke database. Pada show_main, tambahkan data entries ke dalam context agar data yang sudah diinput dapat ditampilakan saat ada permintaan. Langkah selanjutnya, daftrakan path URL di urls.py untuk mengakses fungsi. Membuat file create_product_entry.html dalam folder main/templates yang berfungsi untuk mengirimkan data melalui metode POST. Kemudian, tambahkan main.html untuk menampilkan form input yang sudah dibuat.
+
+Langkah selanjutnya yaitu menampilkan data dalam format XML dan JSON. pada view.py kita membuat fungsi yang dapat mengubah object menjadi format XML dan JSON dengan mengembalikan HTTP response yang sesuai. Kemudia buat dua fungsi lain yang menampilkan ID dalam format XML dan JSON. dengan demikian akan ada empat fungsi yang kita punta yaitu: 
+show_xml, show_json, show_xml_by_id, dan show_json_by_id. Kemudian kita tambahkan path URL di urls.py untuk routing masing-masing fungsi tersebut.
+
+Terakhir gunakan Postman sebagai alat untuk melihat data yang dihasilkan, Misalnya untuk melihat formaat XML cukup kirimkan permintaan URL seperti http://localhost:8000/xml/. Postman akan menampilan object yang sudah dibuat dalam format XML yang diminta.
+
+
+![Flowchart](assets/xml.png)
+![Flowchart](assets/xmlid.png)
+![Flowchart](assets/json.png)
+![Flowchart](assets/jsonid.png)

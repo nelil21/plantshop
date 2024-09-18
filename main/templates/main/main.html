@@ -32,15 +32,7 @@
     <td>{{ product_entry.price }}</td>
     <td>{{ product_entry.stock }}</td>
     <td>{{ product_entry.description }}</td>
-    <td>
-      {% if product_entry.stock > 10 %}
-        Easy
-      {% elif product_entry.stock > 5 %}
-        Medium
-      {% else %}
-        Difficult
-      {% endif %}
-    </td>
+    <td>{{ product_entry.difficulty }}</td>
   </tr>
   {% endfor %}
 </table>

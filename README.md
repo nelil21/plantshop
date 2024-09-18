@@ -151,3 +151,5 @@ Terakhir gunakan Postman sebagai alat untuk melihat data yang dihasilkan, Misaln
 ![Flowchart](assets/xmlid.png)
 ![Flowchart](assets/json.png)
 ![Flowchart](assets/jsonid.png)
+
+terima kasih

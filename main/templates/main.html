@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Plantshop</h1>
+
+<h5>NPM:</h5>
+<p>{{ npm }}</p>
+
+<h5>Name:</h5>
+<p>{{ name }}</p>
+
+<h5>Class:</h5>
+<p>{{ class }}</p>
+
+<br />
+
+{% if not product_entries %}
+<p>Belum ada data product pada mental health tracker.</p>
+{% else %}
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Name Plant</th>
+    <th>Price (IDR)</th>
+    <th>Stock</th>
+    <th>Description</th>
+    <th>Difficulty</th>
+  </tr>
+
+  {% comment %} Menampilkan data produk {% endcomment %}
+  {% for product_entry in product_entries %}
+  <tr>
+    <td>{{ product_entry.name }}</td>
+    <td>{{ product_entry.price }}</td>
+    <td>{{ product_entry.stock }}</td>
+    <td>{{ product_entry.description }}</td>
+    <td>{{ product_entry.difficulty }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_product_entry' %}">
+  <button>Add New Product Entry</button>
+</a>
+<a href="{% url 'main:logout' %}">
+  <button>Logout</button>
+</a>
+
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+{% endblock content %}

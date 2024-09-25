@@ -207,3 +207,6 @@ Pertama, aktifkan virtual environment. Kemudian, cari views.py di subdirektori m
 =======
 terima kasih
 >>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1
+
+
+

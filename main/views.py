@@ -3,7 +3,6 @@ from main.forms import ProductEntryForm
 from main.models import ProductEntry
 from django.http import HttpResponse
 from django.core import serializers
-<<<<<<< HEAD
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -18,35 +17,21 @@ from django.urls import reverse
 @login_required(login_url='/login')
 def show_main(request):
     product_entries = ProductEntry.objects.filter(user=request.user)
-=======
-
-#fungsi untuk show main
-def show_main(request):
-    product_entries = ProductEntry.objects.all()
->>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1
 
     context = {
         'name': 'Nelil Amaani',
         'class': 'PBP B',
         'npm': '2306227835',
-<<<<<<< HEAD
         'product_entries': product_entries,
         'last_login': request.COOKIES['last_login'],
     }
 
     return render(request, 'main.html', context)
-=======
-        'product_entries': product_entries
-    }
-
-    return render(request, 'main/main.html', context)
->>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1
 
 def create_product_entry(request):
     form = ProductEntryForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
-<<<<<<< HEAD
         product_entry = form.save(commit=False)
         product_entry.user = request.user
         product_entry.save()
@@ -54,13 +39,6 @@ def create_product_entry(request):
 
     context = {'form': form}
     return render(request, "create_product_entry.html", context)
-=======
-        form.save()
-        return redirect('main:show_main')
-
-    context = {'form': form}
-    return render(request, "main/create_product_entry.html", context)
->>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1
 
 def show_xml(request):
     data = ProductEntry.objects.all()
@@ -78,7 +56,6 @@ def show_json_by_id(request, id):
     data = ProductEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
-<<<<<<< HEAD
 def register(request):
     form = UserCreationForm()
 
@@ -112,6 +89,3 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
-=======
-
->>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1

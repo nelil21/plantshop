@@ -1,8 +1,13 @@
 from django.urls import path
 from main.views import show_main, create_product_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
+<<<<<<< HEAD
 from main.views import register
 from main.views import login_user
 from main.views import logout_user
+=======
+
+
+>>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1
 
 
 
@@ -19,7 +24,11 @@ urlpatterns = [
     path('json/', show_json, name='show_json'),
     path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
     path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+<<<<<<< HEAD
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
+=======
+    
+>>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1
 ]

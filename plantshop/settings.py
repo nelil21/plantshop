@@ -9,7 +9,11 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+<<<<<<< HEAD
 import os
+=======
+
+>>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,8 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!sa@aiv6z8kvd&6d5&a$5m_9s#ood=o)n+z%gksd0mq8ce_0hp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+<<<<<<< HEAD
 PRODUCTION = os.getenv("PRODUCTION", False)
 DEBUG = not PRODUCTION
+=======
+DEBUG = True
+>>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nelil-amaani-plantshop.pbp.cs.ui.ac.id"]
 

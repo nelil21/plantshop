@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Add New Product Entry</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br><br>
+
+  <label for="price">Price:</label>
+  <input type="number" id="price" name="price" required><br><br>
+
+  <label for="stock">Stock:</label>
+  <input type="number" id="stock" name="stock" required><br><br>
+
+  <label for="description">Description:</label><br>
+  <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+
+  <label for="difficulty">Difficulty:</label>
+  <select id="difficulty" name="difficulty" required>
+    <option value="Easy">Easy</option>
+    <option value="Medium">Medium</option>
+    <option value="Difficult">Difficult</option>
+  </select><br><br>
+
+  <button type="submit">Add Product Entry</button>
+</form>
+
+{% endblock content %}

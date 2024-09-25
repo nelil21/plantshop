@@ -152,6 +152,7 @@ Terakhir gunakan Postman sebagai alat untuk melihat data yang dihasilkan, Misaln
 ![Flowchart](assets/json.png)
 ![Flowchart](assets/jsonid.png)
 
+<<<<<<< HEAD
 terima kasih
 ______________________________________________________________________________________________________
 TUGAS 4
@@ -203,3 +204,6 @@ tidak semua cookies aman, Beberapa pertimbangan keamanan:
 5.Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
 Pertama, aktifkan virtual environment. Kemudian, cari views.py di subdirektori main dan tambahkan import ke UserCreationForm dan messages. Selanjutnya, buat fungsi register untuk menangani pendaftaran pengguna, termasuk validasi form dan penyimpanan data pengguna baru. Selain itu, buat berkas register.html untuk menampilkan form. Selanjutnya, gunakan dekorator @login_required untuk melindungi halaman utama; tambahkan fungsi login_user untuk autentikasi pengguna dan logout_user untuk menghapus sesi pengguna saat logout. Selain itu, tambahkan cookie last_login saat pengguna login dan hapus cookie tersebut saat logout. Modifikasi model ProductEntry untuk menghubungkan setiap entri dengan pengguna yang membuatnya. Selain itu, fungsi create_product_entry dan show_main disesuaikan untuk menampilkan data hanya sesuai dengan pengguna yang dimaksud. Selanjutnya, lakukan migrasi model dan sesuaikan nilai field user default. Akhirnya, tambahkan variabel PRODUCTION dan ubah DEBUG di settings.py. Dengan mengikuti langkah-langkah ini akan memulai sistem autentikasi yang berhasil, yang akan memungkinkan pengguna mendaftar, login, dan melihat informasi akun.
+=======
+terima kasih
+>>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1

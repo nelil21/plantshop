@@ -5,8 +5,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block meta %} {% endblock meta %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <style>
+      body {
+        background-color: #f0f4f3; /* Warna latar belakang lembut */
+        font-family: 'Poppins', sans-serif; /* Tipografi lembut */
+      }
+      .navbar, .footer {
+        background-color: #4caf50; /* Hijau natural */
+      }
+      .button-primary {
+        background-color: #388e3c;
+        transition: background-color 0.3s;
+      }
+      .button-primary:hover {
+        background-color: #2e7d32;
+      }
+      .product-card:hover {
+        transform: translateY(-5px); /* Efek hover untuk membuatnya lebih hidup */
+      }
+    </style>
   </head>
-
   <body>
     {% block content %} {% endblock content %}
   </body>

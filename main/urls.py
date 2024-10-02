@@ -3,6 +3,10 @@ from main.views import show_main, create_product_entry, show_xml, show_json, sho
 from main.views import register
 from main.views import login_user
 from main.views import logout_user
+from main.views import edit_product
+from main.views import delete_product
+from main.views import home, products, categories, cart
+
 
 
 
@@ -21,5 +25,14 @@ urlpatterns = [
     path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
-    path('logout/', logout_user, name='logout'),
+    path('logout/', logout_user, name='logout'), 
+    path('edit-product/<uuid:id>', edit_product, name='edit_product'),
+    path('delete/<uuid:id>', delete_product, name='delete_product'),
+    path('', home, name='home'),  # URL untuk home
+    path('products/', products, name='products'),  # URL untuk produk
+    path('categories/', categories, name='categories'),  # URL untuk kategori
+    path('cart/', cart, name='cart'),  # URL untuk keranjang
+
+
+
 ]

@@ -206,7 +206,100 @@ tidak semua cookies aman, Beberapa pertimbangan keamanan:
 Pertama, aktifkan virtual environment. Kemudian, cari views.py di subdirektori main dan tambahkan import ke UserCreationForm dan messages. Selanjutnya, buat fungsi register untuk menangani pendaftaran pengguna, termasuk validasi form dan penyimpanan data pengguna baru. Selain itu, buat berkas register.html untuk menampilkan form. Selanjutnya, gunakan dekorator @login_required untuk melindungi halaman utama; tambahkan fungsi login_user untuk autentikasi pengguna dan logout_user untuk menghapus sesi pengguna saat logout. Selain itu, tambahkan cookie last_login saat pengguna login dan hapus cookie tersebut saat logout. Modifikasi model ProductEntry untuk menghubungkan setiap entri dengan pengguna yang membuatnya. Selain itu, fungsi create_product_entry dan show_main disesuaikan untuk menampilkan data hanya sesuai dengan pengguna yang dimaksud. Selanjutnya, lakukan migrasi model dan sesuaikan nilai field user default. Akhirnya, tambahkan variabel PRODUCTION dan ubah DEBUG di settings.py. Dengan mengikuti langkah-langkah ini akan memulai sistem autentikasi yang berhasil, yang akan memungkinkan pengguna mendaftar, login, dan melihat informasi akun.
 =======
 terima kasih
->>>>>>> 1a7b03bd959b9151ffe716a38f1fd4426c2927f1
+--------------------------------------------------------------------------------------------------------------------
+1.  Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+1). Inline Styles: atribut style merupakan aturan yang mendapatkan prioritas tinggi dalam aturan CSS yang diterapkan langsung di elemen HTML.
+ 
+<div style="color: red;">Text</div>
 
+2). ID Selector: selector yang menggunakan id memiliki prioritas tinggi daripada class atau element selector
+
+#myID {
+  color: blue;
+}
+
+3). Class, Pseudo-class, dan Attribute Selector: selector berdasarkan class, pseudo seperti :nth-child dan :hover, dan atribut seperti [type="text"] 
+memiliki prioritas yang tinggi daripada element selector, namun memiliki prioritas dibawah ID selector.
+
+.myClass {
+  color: green;
+}
+
+
+4).Element dan Pseudo-element Selector: selector seperti div, p, a, ::before, dan ::after memiliki prioritas yang rendah.
+
+p {
+  color: black;
+}
+
+5). Important Rule: Deklarasi dengan !important akan mengesampingkan aturan, meskipun tingkat prioritasnya lebih rendah. Namun, jika ada dua aturan yang menggunakan !important, aturan yang ditetapkan yaitu yang memiliki tingkat prioritas paling tinggi.
+
+6.) Cassade Order: jika ada dua aturan yang memiliki tingkat prioritas yang sama, maka aturan yang ditulis terakhir dalam file CSS akan diterapkan.
+
+sumber: https://blogs.halodoc.io/best-practices-that-we-follow-to-avoid-specificity-issues/#:~:text=CSS%20specificity%20rule&text=Below%20are%20the%20order%20of,These%20selectors%20has%20lowest%20priority.
+
+2. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design
+
+berikut beberapa alasan mengapa  responsive design menjadi konsep yang penting dalam pengembangan aplikasi web:
+
+1). Pengalaman Pengguna yang Terbaik: Desain responsif memastikan konten dapat dibaca dan dinavigasi dengan mudah di berbagai ukuran layar tanpa menggulir terlalu banyak, karena semakin banyak pengguna yang mengakses internet melalui perangkat mobile. Ini meningkatkan kepuasan pengguna dan mengurangi tingkat pentalan.
+2). Meningkatkan SEO: Google lebih suka situs yang responsif karena mereka menawarkan pengalaman pengguna yang lebih baik dan memiliki peringkat yang lebih baik di hasil pencarian, yang menghasilkan peningkatan visibilitas dan trafik.
+3). Efisiensi Pengembangan: Menghasilkan satu versi situs yang responsif menghemat waktu dan sumber daya karena tidak perlu membuat dan memelihara berbagai versi situs untuk berbagai perangkat.
+4). Fleksibilitas dan Aksesibilitas:Komponen halaman seperti teks dan gambar dapat menyesuaikan diri secara otomatis dengan ukuran layar, sehingga konten tetap jelas dan terorganisir.\
+
+sumber: https://revou.co/kosakata/responsive-web-design
+https://www.dicoding.com/blog/dasar-tampilan-responsif-pada-website/
+
+3. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+
+Margin
+definisi:Margin adalah ruang kosong di luar elemen yang memisahkan elemen dari elemen lain di sekitarnya. Margin hanya mengontrol jarak antar elemen di luar batas elemen itu sendiri.
+Fungsi: Margin digunakan untuk mengatur jarak antara elemen dan elemen-elemen lain yang mengelilingi mereka.
+cara implementasi:dapat mengubah batas dengan menggunakan properti CSS seperti margin-top, margin-right, margin-bottom, dan margin-left.
+contoh:
+margin: 10px; // Margin sama di semua sisi
+margin-top: 5px;
+margin-right: 10px;
+margin-bottom: 15px;
+margin-left: 20px; // Margin berbeda untuk setiap sisi
+
+Border
+definisi: Border merupakan garis pembatas yang terletak di antara margin dan padding
+Fungsi:Untuk mengatur gaya, ketebalan, dan warna garis yang mengelilingi padding dan konten elemen
+cara implementasi: Dengan menggunakan properti CSS seperti border-width, border-style, dan border-color dapat mengubah batas.
+contoh:
+border: 3px solid #000; // Ketebalan 3px, gaya solid, warna hitam
+border-width: 5px;
+border-style: dashed;
+border-color: #FF0000; // Ketebalan 5px, gaya dashed, warna merah
+
+Padding
+Definisi: Padding adalah ruang di antara konten suatu elemen dan batas atau border.
+Fungsi:Padding membuat konten lebih mudah dibaca dan memberikan tampilan yang lebih rapi dengan mengontrol jarak antara konten d
+cara implementasi:Dengan menggunakan properti CSS seperti padding-top, padding-right, padding-bottom, dan padding-left.
+Contoh:
+padding: 20px; // Padding sama di semua sisi
+padding-top: 30px;
+padding-right: 40px;
+padding-bottom: 50px;
+padding-left: 60px; // Padding berbeda untuk setiap sisi
+
+4. Jelaskan konsep flex box dan grid layout beserta kegunaannya
+Flexbox
+konsep: Flexbox merupakan metode tata letak yang memungkinkan pengaturan elemen satu dimensi baik dalam baris horizontal maupun kolom vertikal. Flexbox merupakan pilihan yang tepat Untuk tata letak elemen yang memiliki hubungan dinamis dan membutuhkan distribusi ruang yang fleksibel. Elemen dapat diatur dalam baris atau kolom di mana mereka secara otomatis menyesuaikan diri dengan ruang yang tersedia. 
+Kegunaan: 
+-Mengatur elemen dalam tata letak baris atau kolom dalam satu dimensi
+-Memungkinkan elemen secara otomatis didistribusikan dan diselaraskan dalam container, seperti elemen dalam navbar atau layout card
+-sangat responsif untuk mengatur tata letak yang berubah sesuai ukuran layar
+
+Grid Layout
+konsep: Tata letak grid CSS adalah metode tata letak dua dimensi yang memungkinkan Anda mengatur elemen dalam baris dan kolom secara bersamaan. Tata letak grid memungkinkan Anda mengatur bagaimana elemen diposisikan di kedua sumbu, vertikal dan horizontal, sehingga sangat berguna untuk mengelola tata letak yang lebih kompleks seperti struktur halaman penuh.
+Kegunaan:
+-Mengatur elemen dalam tata ltak baris atau kolom dalam dua dimensi
+-Menentukan berapa banyak baris dan kolom yang diperlukan, serta cara elemen ditempatkan di dalam grid, memungkinkan Anda mengontrol sepenuhnya tata letak elemen di grid
+-Sangat sesuai untuk desain yang lebih kompleks, seperti layout halaman web yang terdiri dari header, sidebar, konten utama, dan footer
+
+
+5. Pertama, tambahkan fungsi edit_product dan delete_product ke views.py. Kemudian, lakukan routing url untuk mengakses fungsi yang telah dibuat sebelumnya. Kemudian gunakan tailwind untuk membuat template. Menggabungkan CDN (Content Delivery Network) ke bagian head. Selanjutnya, buat navbar.html untuk aplikasi desktop dan mobile. Setelah itu, masukkan middleware WhiteNoise untuk memberi Django kemampuan untuk mengelola file statis. Styling login.html, registrasi.html, kartu_produk.html, membuat_entry_produk.html, dan edit_product.html dengan tailwind. Apabila Anda membutuhkan file statis, tambahkan load static pada awal setiap file.
 
 

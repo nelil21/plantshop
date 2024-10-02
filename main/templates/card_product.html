@@ -1,0 +1,35 @@
+{% load static %}
+<style>
+    .product-card {
+        width: 300px; /* Atur lebar kotak produk */
+        height: 400px; /* Atur tinggi kotak produk */
+        overflow: hidden; /* Menyembunyikan bagian gambar yang melebihi kotak */
+    }
+    
+    .product-card img {
+        width: 100%; /* Mengatur lebar gambar agar sesuai dengan kotak */
+        height: auto; /* Menjaga proporsi gambar */
+        max-height: 200px; /* Atur tinggi maksimum gambar agar sesuai */
+        object-fit: cover; /* Memastikan gambar menutupi area kotak */
+    }
+</style>
+
+<div class="product-card bg-white rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 p-4">
+  <div class="text-center">
+    <!-- Menampilkan gambar sesuai dengan image_url yang diatur di model -->
+    <img src="{% static 'images/' %}{{ product_entry.image_url }}" alt="{{ product_entry.name }}" class="w-full h-auto object-cover rounded-md mb-2">
+
+    <h3 class="text-lg font-semibold text-gray-700">{{ product_entry.name }}</h3>
+    <p class="text-green-600 font-bold mt-1">{{ product_entry.price }} IDR</p>
+    <p class="text-gray-600 mt-1">Stock: {{ product_entry.stock }}</p>
+    <p class="text-gray-500 mt-1">{{ product_entry.description }}</p>
+  </div>
+  <div class="mt-2 text-center">
+    <a href="{% url 'main:edit_product' product_entry.id %}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-2 rounded transition duration-300">
+      Edit
+    </a>
+    <a href="{% url 'main:delete_product' product_entry.id %}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded transition duration-300">
+      Delete
+    </a>
+  </div>
+</div>

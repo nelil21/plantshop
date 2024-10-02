@@ -1,29 +1,54 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Create Product</title>
+{% endblock meta %}
+
 {% block content %}
-<h1>Add New Product Entry</h1>
+{% include 'navbar.html' %}
 
-<form method="POST">
-  {% csrf_token %}
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" required><br><br>
+<div class="flex flex-col min-h-screen bg-gray-100">
+  <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
+    <h1 class="text-3xl font-bold text-center mb-8 text-black">Create Product Entry</h1>
+  
+    <div class="bg-white shadow-md rounded-lg p-6 form-style" style="border: 1px solid #d1d5db; border-radius: 15px;">
+      <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        
+        <!-- Name Field -->
+        <div class="flex flex-col">
+          <label for="name" class="mb-2 font-semibold text-gray-700">Name</label>
+          <input type="text" name="name" id="name" class="border border-gray-300 rounded-md w-full p-2">
+        </div>
+        
+        <!-- Price Field -->
+        <div class="flex flex-col">
+          <label for="price" class="mb-2 font-semibold text-gray-700">Price</label>
+          <input type="number" name="price" id="price" class="border border-gray-300 rounded-md w-full p-2">
+        </div>
+        
+        <!-- Stock Field -->
+        <div class="flex flex-col">
+          <label for="stock" class="mb-2 font-semibold text-gray-700">Stock</label>
+          <input type="number" name="stock" id="stock" class="border border-gray-300 rounded-md w-full p-2">
+        </div>
+        
+        <!-- Description Field -->
+        <div class="flex flex-col">
+          <label for="description" class="mb-2 font-semibold text-gray-700">Description</label>
+          <textarea name="description" id="description" class="border border-gray-300 rounded-md w-full p-2"></textarea>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="flex justify-center mt-6">
+          <button type="submit" class="bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out w-full">
+            Create Product Entry
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-  <label for="price">Price:</label>
-  <input type="number" id="price" name="price" required><br><br>
-
-  <label for="stock">Stock:</label>
-  <input type="number" id="stock" name="stock" required><br><br>
-
-  <label for="description">Description:</label><br>
-  <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
-
-  <label for="difficulty">Difficulty:</label>
-  <select id="difficulty" name="difficulty" required>
-    <option value="Easy">Easy</option>
-    <option value="Medium">Medium</option>
-    <option value="Difficult">Difficult</option>
-  </select><br><br>
-
-  <button type="submit">Add Product Entry</button>
-</form>
-
-{% endblock content %}
+{% endblock %}

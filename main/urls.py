@@ -1,18 +1,15 @@
 from django.urls import path
-from main.views import show_main, create_product_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
+from main.views import show_main, create_product_entry, show_xml, show_json, show_xml_by_id, show_json_by_id, add_product_ajax
 from main.views import register
 from main.views import login_user
 from main.views import logout_user
 from main.views import edit_product
 from main.views import delete_product
 from main.views import home, products, categories, cart
-
-
-
-
-
-
-
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path
+from . import views
 
 app_name = 'main'
 
@@ -32,7 +29,8 @@ urlpatterns = [
     path('products/', products, name='products'),  # URL untuk produk
     path('categories/', categories, name='categories'),  # URL untuk kategori
     path('cart/', cart, name='cart'),  # URL untuk keranjang
-
-
-
+    path('add-product-ajax', add_product_ajax, name='add_product_ajax'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

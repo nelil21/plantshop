@@ -303,3 +303,226 @@ Kegunaan:
 5. Pertama, tambahkan fungsi edit_product dan delete_product ke views.py. Kemudian, lakukan routing url untuk mengakses fungsi yang telah dibuat sebelumnya. Kemudian gunakan tailwind untuk membuat template. Menggabungkan CDN (Content Delivery Network) ke bagian head. Selanjutnya, buat navbar.html untuk aplikasi desktop dan mobile. Setelah itu, masukkan middleware WhiteNoise untuk memberi Django kemampuan untuk mengelola file statis. Styling login.html, registrasi.html, kartu_produk.html, membuat_entry_produk.html, dan edit_product.html dengan tailwind. Apabila Anda membutuhkan file statis, tambahkan load static pada awal setiap file.
 
 
+--------------------------------------------------------------------------------------------------
+## Tugas 6
+
+Berikut adalah versi yang lebih santai dari teks yang kamu berikan, namun tetap formal:
+
+---
+
+Keuntungan Menggunakan JavaScript dalam Pengembangan Web
+
+JavaScript menawarkan banyak manfaat dalam pengembangan web, di antaranya:
+
+- Interaktivitas: JavaScript memungkinkan kita membuat elemen-elemen interaktif di halaman web, seperti dropdown, slider, validasi form, dan popup modal, yang tentunya membuat pengalaman pengguna jadi lebih menarik.
+  
+- Manipulasi DOM: Dengan JavaScript, kita bisa mengubah elemen-elemen di halaman web secara dinamis, misalnya menambah, menghapus, atau mengedit konten tanpa harus reload halaman.
+  
+- Komunikasi Asinkron: Berkat fitur seperti `XMLHttpRequest` atau `fetch()`, JavaScript mendukung komunikasi asinkron dengan server (melalui AJAX). Ini artinya, aplikasi bisa merespons tanpa perlu melakukan reload halaman penuh.
+  
+- Kompatibilitas Platform Lain: JavaScript dapat berjalan di hampir semua browser modern, sehingga kode yang kita tulis bisa diakses di berbagai perangkat dan platform.
+  
+- Mendukung Pengembangan SPA (Single Page Application): Framework atau library seperti React, Angular, dan Vue memudahkan pengembangan SPA, yang membuat aplikasi lebih cepat karena hanya bagian tertentu dari halaman yang diperbarui.
+
+Peran `await` dalam `fetch()`
+
+`await` digunakan untuk menunggu hasil dari fungsi asynchronous seperti `fetch()`. Ini memastikan eksekusi kode berikutnya tidak berjalan hingga hasil dari `fetch()` diterima.
+
+- Fungsi utama `await`: `await` memudahkan penulisan kode asynchronous dengan tampilan yang lebih rapi, mirip dengan fungsi synchronous. Dengan `await`, kode setelahnya baru akan dijalankan setelah proses `fetch()` selesai, membuat kode lebih mudah dipahami tanpa perlu menggunakan callback atau `.then()`.
+  
+- Jika `await` tidak digunakan: Jika tidak memakai `await`, `fetch()` akan mengembalikan sebuah *Promise* yang belum selesai, dan kode berikutnya akan dieksekusi sebelum hasil dari fetch tersedia. Ini bisa menimbulkan masalah, seperti data yang belum siap diproses lebih lanjut.
+
+Contoh tanpa `await`:
+```javascript
+const response = fetch('url'); // Mengembalikan Promise
+const data = response.json();   // Kode ini dieksekusi sebelum response selesai
+```
+
+Contoh dengan `await`:
+```javascript
+const response = await fetch('url');
+const data = await response.json(); // Menunggu hingga response selesai
+```
+Penggunaan Decorator `csrf_exempt` pada View untuk AJAX POST
+
+Decorator `@csrf_exempt` digunakan untuk mengecualikan view dari mekanisme perlindungan Cross-Site Request Forgery (CSRF). Di Django, mekanisme CSRF ini ada untuk melindungi aplikasi dari serangan di mana pengguna tanpa sadar bisa mengirimkan request berbahaya.
+
+Namun, saat melakukan POST request dengan AJAX, token CSRF kadang tidak otomatis disertakan. Hal ini bisa menyebabkan error saat POST request dikirim tanpa token CSRF yang valid. Dengan menambahkan `@csrf_exempt` pada view, kita memberi tahu Django untuk tidak melakukan pengecekan CSRF pada request tersebut.
+
+Note, penggunaan `@csrf_exempt` harus sangat hati-hati karena bisa membuka celah keamanan. Sebaiknya, token CSRF disertakan secara eksplisit dalam request AJAX sebagai alternatif yang lebih aman.
+
+Mengapa Validasi Data Pengguna Sebaiknya Dilakukan di Backend
+
+Validasi input dari pengguna sangat penting dilakukan di sisi backend karena beberapa alasan utama:
+
+- Keamanan: Validasi yang hanya dilakukan di frontend bisa dengan mudah dimanipulasi oleh pengguna, misalnya dengan mematikan JavaScript atau mengedit kode halaman. Oleh karena itu, backend perlu memvalidasi untuk melindungi aplikasi dari serangan, seperti injeksi kode atau pengiriman data yang tidak valid.
+  
+- Keuntungan: Frontend adalah bagian yang bisa dimodifikasi pengguna, sehingga backend harus punya mekanisme validasi sendiri untuk memastikan aplikasi tetap berjalan dengan benar meskipun frontend telah dimodifikasi.
+  
+- Best Practices: Validasi yang ideal dilakukan di kedua sisi, baik frontend untuk memberikan pengalaman pengguna yang lebih cepat, dan di backend untuk menjamin keamanan serta integritas data.
+
+Step by Step Implementasi
+
+## AJAX `GET`
+
+1. Agar product card bisa menggunakan AJAX `GET`, kita perlu menambahkan block kode product card ke dalam fungsi asinkron `refreshProducts()` di `main.html`, seperti berikut:
+   
+```javascript
+async function refreshProducts() {
+    document.getElementById("product_cards").innerHTML = "";
+    document.getElementById("product_cards").className = "";
+    const Products = await getProducts();
+    let htmlString = "";
+    let classNameString = "";
+    
+    if (Products.length === 0) {
+        classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
+        htmlString = `
+            <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                <p class="text-center text-gray-600 mt-4">No product yet.</p>
+            </div>
+        `;
+    } else {
+        classNameString = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-7xl mx-auto";
+        Products.forEach((item) => {
+            const name = DOMPurify.sanitize(item.fields.name);
+            const description = DOMPurify.sanitize(item.fields.description);
+            const imageUrl = item.fields.image ? `/media/${item.fields.image}` : '/path/to/placeholder-image.png';
+            htmlString += `
+                <!-- Isi dengan kode HTML relevan -->
+            `;
+        });
+    }
+    
+    document.getElementById("product_cards").className = classNameString;
+    document.getElementById("product_cards").innerHTML = htmlString;
+}
+
+refreshProducts();
+```
+
+2. Fungsi `refreshProduct()` ini memanggil fungsi asinkron lain, yaitu `getProduct()` seperti berikut:
+
+```javascript
+async function getProducts() {
+    return fetch("{% url 'main:show_json' %}").then((res) => res.json());
+}
+```
+
+Fungsi ini melakukan request AJAX menggunakan `fetch API` untuk mendapatkan data produk milik user yang sedang login secara asinkron. Data tersebut kemudian diproses oleh `refreshProducts()` untuk ditampilkan di halaman utama (`main.html`).
+
+## AJAX `POST`
+
+1. Untuk menambahkan produk dengan AJAX, tambahkan tombol form dengan kode berikut di bawah tombol yang mengarah ke halaman `create-product`:
+
+```html
+<button data-modal-target="crudModal" data-modal-toggle="crudModal" class="w-auto ml-4 flex justify-center py-2 px-4 text-sm font-medium rounded-[15px] text-black bg-white hover:bg-gray-200 focus:outline-none focus:ring-0 transition duration-200 ease-in-out hover:shadow-[0px_0px_15px_5px_rgba(255,255,255,0.4)]" onclick="showModal();">
+    Add New Product by AJAX
+</button>
+```
+
+2. Agar modal dapat muncul ketika tombol ditekan dan ditutup kembali, tambahkan fungsi `showModal()`, `hideModal()`, serta event listener-nya di bagian `<script>`:
+
+```javascript
+const modal = document.getElementById('crudModal');
+const modalContent = document.getElementById('crudModalContent');
+
+function showModal() {
+    modal.classList.remove('hidden'); 
+    setTimeout(() => {
+        modalContent.classList.remove('opacity-0', 'scale-95');
+        modalContent.classList.add('opacity-100', 'scale-100');
+    }, 50); 
+}
+
+function hideModal() {
+    modalContent.classList.remove('opacity-100', 'scale-100');
+    modalContent.classList.add('opacity-0', 'scale-95');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 150); 
+}
+
+document.getElementById("cancelButton").addEventListener("click", hideModal);
+document.getElementById("closeModalBtn").addEventListener("click", hideModal);
+```
+
+3. Buat fungsi `view` baru untuk menambahkan produk ke database dengan menggunakan `csrf_exempt` dan `require_POST` di `views.py`:
+
+```python
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+```
+
+4. Tambahkan path di `urls.py` yang mengarah ke fungsi `add_product_ajax()` dengan cara mengimport fungsi tersebut dan menambahkannya ke `urlpatterns`:
+
+```python
+from main.views import add_product_ajax
+
+urlpatterns = [
+    ...
+    path('add-product-ajax', add_product_ajax, name='add_product_ajax'),
+]
+```
+
+5. Sambungkan form di modal dengan path `add_product_ajax` dengan menambahkan fungsi `addProduct()` dan event listener berikut di bagian `<script>` pada `main.html`:
+
+```javascript
+function addProduct() {
+    fetch("{% url 'main:add_product_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#productForm')),
+    })
+    .then(response => refreshProducts());
+    
+    document.getElementById("productForm").reset(); 
+    document.querySelector("[data-modal-toggle='crudModal']").click();
+    
+    return false;
+}
+
+document.getElementById("productForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    addProduct();
+});
+```
+
+6. Untuk menampilkan dan menyegarkan data produk tanpa reload, tambahkan fungsi asinkron `getProducts()` dan `refreshProducts()` di bagian `<script>`:
+
+```javascript
+async function getProducts() {
+    return fetch("{% url 'main:show_json' %}").then((res) => res.json());
+}
+
+async function refreshProducts() {
+    document.getElementById("product_cards").innerHTML = "";
+    document.getElementById("product_cards").className = "";
+    const Products = await getProducts();
+    let htmlString = "";
+    let classNameString = "";
+    
+    if (Products.length === 0) {
+        classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
+        htmlString = `
+            <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                <p class="text-center text-gray-600 mt-4">No product yet.</p>
+            </div>
+        `;
+    } else {
+        classNameString = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-7xl mx-auto";
+        Products.forEach((item) => {
+            const name = DOMPurify.sanitize(item.fields.name);
+            const description = DOMPurify.sanitize(item.fields.description);
+            const imageUrl = item.fields.image ? `/media/${item.fields.image}` : '/path/to/placeholder-image.png';
+            htmlString += `
+                <!-- Isi dengan kode HTML relevan -->
+            `;
+        });
+    }
+    
+    document.getElementById("product_cards").className = classNameString;
+    document.getElementById("product_cards").innerHTML = htmlString;
+}
+
+refreshProducts();
+```

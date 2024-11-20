@@ -1,7 +1,8 @@
+import json
 from django.shortcuts import render, redirect   # Tambahkan import redirect di baris ini
 from main.forms import ProductEntryForm
 from main.models import ProductEntry
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -132,7 +133,6 @@ def add_product_ajax(request):
     description = strip_tags(request.POST.get("description"))
     stock = request.POST.get("stock")
     difficulty = request.POST.get("difficulty")
-    image = request.FILES.get("image")
     user = request.user
     
     new_product = ProductEntry(
@@ -141,9 +141,33 @@ def add_product_ajax(request):
         description=description,
         stock=stock,
         difficulty=difficulty,
-        image=image,
         user=user
     )
     new_product.save()
 
     return HttpResponse(b"CREATED", status=201)
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        try:
+            # Parsing JSON dari request.body
+            data = json.loads(request.body)
+
+            # Membuat entri produk baru
+            new_product = ProductEntry.objects.create(
+                user=request.user,  # Menggunakan pengguna saat ini
+                name=data["name"],  # Nama produk
+                price=int(data["price"]),  # Harga produk
+                description=data["description"],  # Deskripsi produk
+                stock=int(data["stock"]),  # Stok produk
+                difficulty=data["difficulty"],  # Kesulitan produk
+            )
+
+            new_product.save()  # Simpan ke database
+
+            return JsonResponse({"status": "success", "message": "Product created successfully"}, status=200)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=400)
+    else:
+        return JsonResponse({"status": "error", "message": "Invalid request method"}, status=401)

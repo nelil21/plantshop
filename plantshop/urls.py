@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     
-    path('', include('main.urls')),  # Include routing dari aplikasi `main`
+    path('', include('main.urls')),
+      path('auth/', include('authentication.urls')),  # Include routing dari aplikasi `main`
 ]
